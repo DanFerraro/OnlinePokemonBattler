@@ -1,0 +1,13 @@
+<apex:page controller="TeamsPageCtrl" title="Teams">
+    <apex:form >
+        Team view and setup
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:commandButton value="New"/>
+                <apex:commandButton value="Edit"/>
+                <apex:commandButton value="Delete"/>
+            </apex:pageBlockSection>
+            <apex:commandButton value="Back" action="{!Back}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

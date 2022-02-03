@@ -1,0 +1,8 @@
+<apex:page controller="BattleRecordCtrl" title="Battle Record">
+    <apex:form >
+        Battle Record
+        <apex:pageBlock >
+            <apex:commandButton value="Back" action="{!Back}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

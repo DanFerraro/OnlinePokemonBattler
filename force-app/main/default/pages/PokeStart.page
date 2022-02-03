@@ -1,0 +1,15 @@
+<apex:page controller="PokeStartCtrl" title="PokeMon">
+    <apex:form >
+        PokeMon
+        <apex:pageBlock >
+    		<apex:pageBlockSection >
+       	 		<apex:commandButton value="Battle" action="{!Battle}"/>
+            	<apex:commandButton value="Teams" action="{!Teams}"/>
+    		</apex:pageBlockSection>
+        	<apex:pageBlockSection >
+       	 		<apex:commandButton value="Battle Record" action="{!BattleRecord}"/>
+            	<apex:commandButton value="PokeDex" action="{!Dex}"/>
+    		</apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

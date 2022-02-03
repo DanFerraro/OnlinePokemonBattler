@@ -1,0 +1,8 @@
+<apex:page controller="PokeDexCtrl" title="PokeDex">
+    <apex:form >
+        PokeDex
+        <apex:pageBlock >
+            <apex:commandButton value="Back" action="{!Back}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

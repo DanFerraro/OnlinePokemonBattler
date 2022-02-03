@@ -1,0 +1,14 @@
+<apex:page controller="PreBattleCtrl" title="Battle Setup">
+    <apex:form >
+        Battle Setup
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                Opponent Section
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+                Self Section
+            </apex:pageBlockSection>
+            <apex:commandButton value="Back" action="{!Back}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
