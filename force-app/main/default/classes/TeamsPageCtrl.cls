@@ -12,7 +12,7 @@ public class TeamsPageCtrl {
      * that only queries them when they aren't already on hand.
      */
     private static Map<Id, Pokemon__c> PokemonMap;
-    public static Map<Pokemon__c> getPokemonMap() { 
+    public static Map<Id, Pokemon__c> getPokemonMap() { 
         if (PokemonMap == null){
             PokemonMap = new Map<Id, Pokemon__c>([SELECT Id, Name, pokeId__c FROM Pokemon__c]);
         }
@@ -32,7 +32,7 @@ public class TeamsPageCtrl {
         PokemonPicklistOptions = new List<SelectOption>();
         // All of the different Pokemon are looked up and added to the picklist options.
         // The value of each option is the Pokemon's Id. The Pokemon's names are the labels.
-        for(Pokemon__c p : getPokemonPicklistOptions()){
+        for(Pokemon__c p : getPokemonMap().values()){
             PokemonPicklistOptions.add(new SelectOption(p.Id,p.Name));
         }
     }
@@ -43,7 +43,7 @@ public class TeamsPageCtrl {
      */
     public List<TeamView> getTeamViews(){
         List<TeamView> Results = new List<TeamView>();
-        for (Team__c Team : [SELECT Name, Owner, (SELECT Id, Pokemon FROM TeamPokemon) FROM Team__c WHERE Owner = :UserInfo.getUserId()]){
+        for (Team__c Team : [SELECT Name, OwnerId, (SELECT Id, Pokemon FROM TeamPokemon) FROM Team__c WHERE OwnerId = :UserInfo.getUserId()]){
             Results.add(new TeamView(Team));
         }
         return Results;
