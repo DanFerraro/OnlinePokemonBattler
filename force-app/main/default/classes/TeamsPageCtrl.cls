@@ -21,7 +21,7 @@ public class TeamsPageCtrl {
 
     // Stores the list of Pokemon selection options. This is used to make picklists.
     private final List<SelectOption> PokemonPicklistOptions;
-    public List<String> getPokemonPicklistOptions(){
+    public List<SelectOption> getPokemonPicklistOptions(){
         return PokemonPicklistOptions;
     }
 
@@ -32,7 +32,7 @@ public class TeamsPageCtrl {
         PokemonPicklistOptions = new List<SelectOption>();
         // All of the different Pokemon are looked up and added to the picklist options.
         // The value of each option is the Pokemon's Id. The Pokemon's names are the labels.
-        for(Pokemon__c p : getPokemonList()){
+        for(Pokemon__c p : getPokemonPicklistOptions()){
             PokemonPicklistOptions.add(new SelectOption(p.Id,p.Name));
         }
     }
@@ -43,7 +43,7 @@ public class TeamsPageCtrl {
      */
     public List<TeamView> getTeamViews(){
         List<TeamView> Results = new List<TeamView>();
-        for (Team__c Team : [SELECT Name, Owner (SELECT Id, Pokemon FROM TeamPokemon) FROM Team__c WHERE Owner = 'UserInfo.getUserId()']){
+        for (Team__c Team : [SELECT Name, Owner, (SELECT Id, Pokemon FROM TeamPokemon) FROM Team__c WHERE Owner = :UserInfo.getUserId()]){
             Results.add(new TeamView(Team));
         }
         return Results;
