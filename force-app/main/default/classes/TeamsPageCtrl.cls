@@ -43,7 +43,7 @@ public class TeamsPageCtrl {
      */
     public List<TeamView> getTeamViews(){
         List<TeamView> Results = new List<TeamView>();
-        for (Team__c Team : [SELECT Name, OwnerId, (SELECT Id, Pokemon FROM TeamPokemon) FROM Team__c WHERE OwnerId = :UserInfo.getUserId()]){
+        for (Team__c Team : [SELECT Name, OwnerId, (SELECT Id, Pokemon__c FROM TeamPokemon__r) FROM Team__c WHERE OwnerId = :UserInfo.getUserId()]){
             Results.add(new TeamView(Team));
         }
         return Results;
@@ -71,14 +71,14 @@ public class TeamsPageCtrl {
             Team = t;
             for (Integer i = 0; i < 6; i++){
                 // Checks to see if a new TeamPokemon record must be made, or if there's an existing one to use.
-                if (t.TeamPokemon == null || t.TeamPokemon.size() < i){
+                if (t.TeamPokemon__r == null || t.TeamPokemon__r.size() < i){
                     TeamPokemon__c creation = new TeamPokemon__c();
                     // New TeamPokemon records will be junctions of this team and the first Pokemon record, initially.
-                    creation.Team__c = t;
-                    creation.Pokemon__c = getPokemonMap().values()[0];
+                    creation.Team__c = t.Id;
+                    creation.Pokemon__c = getPokemonMap().values()[0].Id;
                     Pokemon[i] = creation;
                 } else {
-                    Pokemon[i] = t.TeamPokemon[i];
+                    Pokemon[i] = t.TeamPokemon__r[i];
                 }
             }
             // If any new TeamPokemon records were made, now is the time to insert them into the database.
@@ -93,7 +93,7 @@ public class TeamsPageCtrl {
         // Indexed Pokemon getters and setters.
         public Id getPokemon(Integer i){
             if (i < 0 || i > 5) throw new IllegalArgumentException('Out of bounds. You can only get Pokemon 0 - 5 from a TeamView.');
-            return getPokemonMap().get(Pokemon[i].Pokemon__c.Id);
+            return getPokemonMap().get(Pokemon[i].Pokemon__c);
         }
         public void setPokemon(Id p, Integer i){
             if (i < 0 || i > 5) throw new IllegalArgumentException('Out of bounds. You can only get Pokemon 0 - 5 from a TeamView.');
