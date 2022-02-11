@@ -93,11 +93,11 @@ public class TeamsPageCtrl {
         // Indexed Pokemon getters and setters.
         public Id getPokemon(Integer i){
             if (i < 0 || i > 5) throw new IllegalArgumentException('Out of bounds. You can only get Pokemon 0 - 5 from a TeamView.');
-            return getPokemonMap().get(Pokemon[i].Pokemon__c.Id);
+            return Pokemon[i].Pokemon__c;
         }
         public void setPokemon(Id p, Integer i){
             if (i < 0 || i > 5) throw new IllegalArgumentException('Out of bounds. You can only get Pokemon 0 - 5 from a TeamView.');
-            Pokemon[i].Pokemon__c = getPokemonMap().get(p).Id;
+            Pokemon[i].Pokemon__c = p;
             update Pokemon[i];
         }
 
