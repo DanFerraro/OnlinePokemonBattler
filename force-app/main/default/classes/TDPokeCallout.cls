@@ -66,7 +66,7 @@ public class TDPokeCallout
                     pokemon.Type_1__c = primaryType;
                 }
                 System.debug(pokemon);
-                if(integer.valueOf(pokemon.PokeId__c) < 153){
+                if(integer.valueOf(pokemon.PokeId__c) < 151){
                		newPokemon.add(pokemon);
                 }
                 else{
