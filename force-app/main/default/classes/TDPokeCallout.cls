@@ -66,7 +66,12 @@ public class TDPokeCallout
                     pokemon.Type_1__c = primaryType;
                 }
                 System.debug(pokemon);
-               	newPokemon.add(pokemon);
+                if(integer.valueOf(pokemon.PokeId__c) < 153){
+               		newPokemon.add(pokemon);
+                }
+                else{
+                    i = existingPokemon.size() + 100;
+                }
                 //System.debug(resMap);
                 //System.debug(typeList.size());
                 //System.debug(spriteMap);
