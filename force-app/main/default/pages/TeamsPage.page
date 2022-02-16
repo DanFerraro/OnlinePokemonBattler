@@ -1,12 +1,15 @@
-<apex:page controller="TeamsPageCtrl" title="Teams">
+<apex:page Controller="TeamsPageCtrl"  title="Teams" lightningStylesheets="true">
     <apex:form >
         Team view and setup
         <apex:pageBlock >
             <apex:pageBlockSection >
-                <apex:commandButton value="New"/>
+                <apex:selectList size="5" multiselect="true">
+       				<apex:selectOptions value="{!PokemonPicklistOptions}" />
+ 				</apex:selectList>
+                <apex:commandButton value="New" />
                 <apex:commandButton value="Edit"/>
                 <apex:commandButton value="Delete"/>
-            </apex:pageBlockSection>
+            </apex:pageBlockSection>            
             <apex:commandButton value="Back" action="{!Back}"/>
         </apex:pageBlock>
     </apex:form>
