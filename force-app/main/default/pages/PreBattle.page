@@ -1,14 +1,59 @@
-<apex:page controller="PreBattleCtrl" title="Battle Setup">
-    <apex:form >
-        Battle Setup
-        <apex:pageBlock >
-            <apex:pageBlockSection >
-                Opponent Section
-            </apex:pageBlockSection>
-            <apex:pageBlockSection >
-                Self Section
-            </apex:pageBlockSection>
+<apex:page controller="PreBattleCtrl" title="Battle Setup" lightningStylesheets="true">    
+    Battle Setup
+    <apex:pageBlock >
+        <apex:pageBlockSection >
+            <div class = "selection">
+                <h1>
+                    Player Team Selection:
+                </h1>
+                <apex:form >
+                    <apex:selectList size="6" value="{!teamName1}" multiselect="false">
+                        <apex:selectOptions value="{!teamOptions}"></apex:selectOptions>    
+                    </apex:selectList>
+                    <apex:commandButton value="Select" action="{!test}" rerender="out1" status="status1"/>
+                </apex:form>
+                <apex:outputPanel id="out1">
+                    <apex:actionStatus id="status1" startText="Processing...">
+                        <Apex:facet name="stop">
+                            <apex:outputPanel >
+                                <p>
+                                    You have selected:
+                                </p>
+                                <apex:dataList value="{!teamName1}" var="p">{!p}</apex:dataList>
+                            </apex:outputPanel>
+                        </Apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel>
+            </div>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection >
+            <div class = "selection">                
+                <h1>
+                    Opponent Team Selection:
+                </h1>
+                <apex:form >
+                    <apex:selectList size="6" value="{!teamName2}" multiselect="false">
+                        <apex:selectOptions value="{!teamOptions}"></apex:selectOptions>    
+                    </apex:selectList>
+                    <apex:commandButton value="Select" action="{!test}" rerender="out2" status="status2"/>
+                </apex:form>
+                <apex:outputPanel id="out2">
+                    <apex:actionStatus id="status2" startText="Processing...">
+                        <Apex:facet name="stop">
+                            <apex:outputPanel >
+                                <p>
+                                    You have selected:
+                                </p>
+                                <apex:dataList value="{!teamName2}" var="o">{!o}</apex:dataList>
+                            </apex:outputPanel>
+                        </Apex:facet>
+                    </apex:actionStatus>
+                </apex:outputPanel>
+            </div>
+        </apex:pageBlockSection>
+        <apex:form >
             <apex:commandButton value="Back" action="{!Back}"/>
-        </apex:pageBlock>
-    </apex:form>
+            <apex:commandButton value="Start Battle" action="{!startBattle}"/>
+        </apex:form>
+    </apex:pageBlock>
 </apex:page>
